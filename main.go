@@ -18,7 +18,7 @@ func main() {
 		fmt.Fprintf(w, "Hi")
 	})
 
-	log.Fatal(http.ListenAndServe(":80", nil))
+	log.Fatal(http.ListenAndServe(":8081", nil))
 
 	bot, err := tgbotapi.NewBotAPI("625172392:AAGTznFxi22M4m1HrAxJyRo_axd9FLmGcNk")
 	if err != nil {
