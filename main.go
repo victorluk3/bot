@@ -10,16 +10,6 @@ import (
 
 func main() {
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, r.URL.Path[1:])
-	})
-
-	http.HandleFunc("/hi", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hi")
-	})
-
-	log.Fatal(http.ListenAndServe(":8081", nil))
-
 	bot, err := tgbotapi.NewBotAPI("625172392:AAGTznFxi22M4m1HrAxJyRo_axd9FLmGcNk")
 	if err != nil {
 		log.Panic(err)
@@ -70,5 +60,15 @@ func main() {
 			bot.Send(msg)
 		}
 	}
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, r.URL.Path[1:])
+	})
+
+	http.HandleFunc("/hi", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hi")
+	})
+
+	log.Fatal(http.ListenAndServe(":8081", nil))
 
 }
