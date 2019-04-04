@@ -4,11 +4,24 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 func main() {
+	go func() {
+		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+			http.ServeFile(w, r, r.URL.Path[1:])
+		})
+
+		http.HandleFunc("/hi", func(w http.ResponseWriter, r *http.Request) {
+			fmt.Fprintf(w, "Hi")
+		})
+
+		//fmt.Printf("server runing port: %v\n", os.Getenv("PORT"))
+		log.Fatal(http.ListenAndServe(os.Getenv("PORT"), nil))
+	}()
 
 	bot, err := tgbotapi.NewBotAPI("625172392:AAGTznFxi22M4m1HrAxJyRo_axd9FLmGcNk")
 	if err != nil {
@@ -60,15 +73,4 @@ func main() {
 			bot.Send(msg)
 		}
 	}
-
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, r.URL.Path[1:])
-	})
-
-	http.HandleFunc("/hi", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hi")
-	})
-
-	log.Fatal(http.ListenAndServe(":8081", nil))
-
 }
