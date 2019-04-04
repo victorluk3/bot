@@ -21,7 +21,7 @@ func main() {
 
 		//fmt.Printf("server runing port: %v\n", os.Getenv("PORT"))
 		http.ListenAndServe(os.Getenv("PORT"), nil)
-		//log.Fatal()
+
 	}()
 
 	bot, err := tgbotapi.NewBotAPI("625172392:AAGTznFxi22M4m1HrAxJyRo_axd9FLmGcNk")
