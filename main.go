@@ -24,7 +24,7 @@ func main() {
 
 	}()
 
-	bot, err := tgbotapi.NewBotAPI("625172392:AAGTznFxi22M4m1HrAxJyRo_axd9FLmGcNk")
+	bot, err := tgbotapi.NewBotAPI(os.Getenv("TKEY"))
 	if err != nil {
 		log.Panic(err)
 	}
